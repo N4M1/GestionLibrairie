@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="GestionMVVM.View.MyUsers.UserCommandes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GestionMVVM.View.MyUsers"
+             mc:Ignorable="d" 
+             d:DesignHeight="786" d:DesignWidth="1162">
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="97" />
+            <RowDefinition />
+            <RowDefinition Height="0*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="64">
+                <TextBlock FontSize="25" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" > Gestionnaire des Commandes</TextBlock>
+            </Menu>
+
+            <Menu DockPanel.Dock="Left" Height="24" Width="1059">
+
+                <MenuItem Header="_Lister toutes les commandes" Click="Lister_Click_All" FontWeight="UltraBold" FontSize="15"/>
+                <MenuItem Header="_Lister par éditeur" Click="Lister_Click_Editeur" FontWeight="UltraBold" FontSize="15"/>
+                <MenuItem Header="_Lister par fournisseur" Click="Lister_Click_Fournisseur" FontWeight="UltraBold" FontSize="15"/>
+                <MenuItem Header="_Lister par date" Click="Lister_Click_Date" FontWeight="UltraBold" FontSize="15"/>
+                <MenuItem Header="_Ajouter une commande" Click="Ajouter_une_Commande" FontWeight="UltraBold" FontSize="15"/>
+                <MenuItem Header="_Supprimer une commande" Click="Supprimer_une_Commande" FontWeight="UltraBold" FontSize="15"/>
+
+            </Menu>
+        </DockPanel>
+
+        <DataGrid Name="dgCommandes" Margin="0,0,0,-14" Grid.Row="1" Grid.RowSpan="2" IsReadOnly="True" Background="#0CB76B">
+            <Button Content="Cool Button" x:Name="CoolButton" Click="CoolButton_Click" Width="86"/>
+        </DataGrid>
+
+        <StackPanel>
+            <ListBox x:Name="MyListBox"/>
+        </StackPanel>
+
+        <!-- It's important that this is in the end of the XAML as it needs to be on top of everything else! -->
+        <Grid x:Name="InputBox" Visibility="Collapsed">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="Orange" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            CornerRadius="0,55,0,55" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="5" Text="Entrez l'id de la commande à supprimer : " FontWeight="Bold" FontFamily="Cambria" />
+                    <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="YesButton" Margin="5" Content="Valider" Background="{x:Null}" Click="YesButton_Click"/>
+                        <Button x:Name="NoButton" Margin="5" Content="Annuler" Background="{x:Null}" Click="NoButton_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <TextBox MinWidth="90" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="input_Id_Livre" Margin="449,533,0,0" Grid.Row="1" Width="95" Background="#FF506BFF" FontWeight="Bold" />
+        <TextBox MinWidth="90" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="input_Id_Fournisseur" Margin="574,533,0,0" Grid.Row="1" Width="17" Background="#FF506BFF" FontWeight="Bold"/>
+        <TextBox MinWidth="90" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="input_Date_achat" Margin="696,534,0,0" Grid.Row="1" Width="17" Background="#FF506BFF" FontWeight="Bold"/>
+        <TextBox MinWidth="90" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="input_Prix_achat" Margin="815,534,0,0" Grid.Row="1" Width="17" Background="#FF506BFF" FontWeight="Bold"/>
+        <TextBox MinWidth="90" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="input_Nbr_exemplaires" Margin="930,533,0,0" Grid.Row="1" Width="17" Background="#FF506BFF" FontWeight="Bold"/>
+
+        <Label Name ="l1" Content="Id Livre" HorizontalAlignment="Left" Margin="466,504,0,0" Grid.Row="1" VerticalAlignment="Top" Width="61" FontWeight="Bold" Background="#FF267FE2" FontSize="14"/>
+        <Label x:Name ="l2" Content="Id Fournisseur" HorizontalAlignment="Left" Margin="566,504,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" FontWeight="Bold" Background="#FF267FE2" FontSize="14"/>
+        <Label x:Name ="l3" Content="Date achat" HorizontalAlignment="Left" Margin="699,504,0,0" Grid.Row="1" VerticalAlignment="Top" Width="84" FontWeight="Bold" Background="#FF267FE2" FontSize="14"/>
+        <Label x:Name ="l4" Content="Prix achat" HorizontalAlignment="Left" Margin="820,505,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" FontWeight="Bold" Background="#FF267FE2" FontSize="14"/>
+        <Label x:Name ="l5" Content="Nbr exemplaires" HorizontalAlignment="Left" Margin="915,504,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" FontWeight="Bold" Background="#FF267FE2" FontSize="14"/>
+
+
+        <Button x:Name="Annuler" Margin="948,474,0,0" Content="Annuler"  Click="Annuler_Click"  Background="#FFCC1616" FontWeight="Bold" Grid.Row="1" MinWidth="25" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="72"/>
+        <Button x:Name="Ajouter" Margin="815,470,0,0" Content="Ajouter le livre"  Click="Ajouter_Click" FontWeight="Bold" Background="#FF3DAAFF" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="96" />
+
+        <TextBox MinWidth="90" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="recherche" Margin="75,0,0,0" Width="156" Background="#FF506BFF" FontWeight="Bold" TextChanged="recherche_TextChanged" />
+
+    </Grid>
+</UserControl>
