@@ -12,11 +12,15 @@
 
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button Content="Livres" HorizontalAlignment="Left" Height="40" Margin="10,24,0,0" VerticalAlignment="Top" Width="247" Click="Livres_Click" FontWeight="UltraBold" FontSize="19"/>
-        <Button Content="Fournisseur" HorizontalAlignment="Left" Height="40" Margin="279,24,0,0" VerticalAlignment="Top" Width="246" Click="Fournisseur_Click" FontWeight="UltraBold" FontSize="19"/>
-        <Button Content="Commandes" HorizontalAlignment="Left" Height="40" Margin="547,24,0,0" VerticalAlignment="Top" Width="246" Click="Commandes_Click" FontWeight="UltraBold" FontSize="19"/>
 
-        <Grid x:Name="grContent" Grid.Row="1" Background="#0CB76B" />
+        <Button Name="livres" Content="Livres" HorizontalAlignment="Left" Height="40" Margin="10,24,0,0" VerticalAlignment="Top" Width="247" Click="Livres_Click" FontWeight="UltraBold" FontSize="19"/>
+        <Button Name="fournisseurs" Content="Fournisseurs" HorizontalAlignment="Left" Height="40" Margin="279,24,0,0" VerticalAlignment="Top" Width="246" Click="Fournisseur_Click" FontWeight="UltraBold" FontSize="19"/>
+        <Button Name="commandes" Content="Commandes" HorizontalAlignment="Left" Height="40" Margin="547,24,0,0" VerticalAlignment="Top" Width="246" Click="Commandes_Click" FontWeight="UltraBold" FontSize="19"/>
+
+        <Grid x:Name="grContent" Grid.Row="1"  />
+        <Grid.Background>
+            <ImageBrush ImageSource="/GestionMVVM;component/images/livres.png" Stretch="UniformToFill"/>
+        </Grid.Background>
 
 
     </Grid>

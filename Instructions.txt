@@ -1,0 +1,9 @@
+B2 - Jaremczuk Jonathan | Michel Marilou | Cocco Anthony
+
+Le dossier du projet est "GestionMVVM".
+Avant de lancer l'application, dans le dossier "xampp", lancer "xamp-control".
+Lancer les modules "Apache" et "MySql".
+L'application peut être lancée en exécutant "GestionMVVM.exe" dans "\GestionMVVM\bin\Debug".
+Si cela ne marche pas, lancer le projet avec Visual Studio.
+La base de donnée est "gestionlibrairie".
+

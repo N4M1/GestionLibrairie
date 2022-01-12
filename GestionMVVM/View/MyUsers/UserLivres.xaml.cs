@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 
-
 namespace GestionMVVM.View.MyUsers
 {
     
@@ -93,8 +92,16 @@ namespace GestionMVVM.View.MyUsers
 
 
         //Livres
+        //Affichage des éditeurs
         private void Lister_Click_Editeur(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = false;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -144,8 +151,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des auteurs
         private void Lister_Click_Auteur(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = false;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -195,8 +210,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des titres
         private void Lister_Click_Titre(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = false;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -213,8 +236,6 @@ namespace GestionMVVM.View.MyUsers
 
                 while (rdr.Read())
                 {
-                    //Console.WriteLine(rdr["Titre_livre"].ToString());
-
                     Livre livre = new Livre();
 
                     livre.Id_Livre = rdr.GetInt32("Id_Livre");
@@ -246,8 +267,16 @@ namespace GestionMVVM.View.MyUsers
             
         }
 
+        //Ajout d'un livre
         private void Ajouter_un_Livre(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = false;
+            b6.IsEnabled = true;
+
             Lister_Click_All(sender, e);
 
             input_ISBN.Visibility = System.Windows.Visibility.Visible;
@@ -278,9 +307,10 @@ namespace GestionMVVM.View.MyUsers
             Ajouter.Visibility = System.Windows.Visibility.Visible;
         }
 
+        //Suppression d'un livre
         private void Supprimer_un_Livre(object sender, RoutedEventArgs e)
         {
-            
+            recherche.IsEnabled = false;
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -322,25 +352,32 @@ namespace GestionMVVM.View.MyUsers
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                recherche.IsEnabled = true;
             }
             finally
             {
                 connexion.Close();
                 
             }
+            recherche.IsEnabled = true;
             InputBox.Visibility = System.Windows.Visibility.Visible;
-
         }
 
+        //Affichage de tous les livres
         private void Lister_Click_All(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = false;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
             AfficherAll();
         }
 
         //Input Box Delete 
         private void CoolButton_Click(object sender, RoutedEventArgs e)
         {
-            // CoolButton Clicked! Let's show our InputBox.
             InputBox.Visibility = System.Windows.Visibility.Visible;
         }
 
@@ -398,12 +435,29 @@ namespace GestionMVVM.View.MyUsers
             string ISBN = input_ISBN.Text;
             string Titre_livre = input_Titre_livre.Text;
             string Theme_livre = input_Theme_livre.Text;
-            int Nbr_pages_livre = int.Parse(input_Nbr_pages_livre.Text); 
+            int Nbr_pages_livre;
+            try
+            {
+                Nbr_pages_livre = int.Parse(input_Annee_edition.Text);
+            }
+            catch (Exception ex)
+            {
+                Nbr_pages_livre = 0;
+            }
             string Format_livre = input_Format_livre.Text;
             string Nom_auteur = input_Nom_auteur.Text;
             string Prenom_auteur = input_Prenom_auteur.Text;
             string Editeur = input_Editeur.Text;
-            int Annee_edition = int.Parse(input_Annee_edition.Text);
+            int Annee_edition;
+            try
+            {
+                Annee_edition = int.Parse(input_Annee_edition.Text);
+            }
+            catch (Exception ex)
+            {
+                Annee_edition = 0;
+            }
+            
             double Prix_vente = 20;
             string Langue_livre = input_Langue_livre.Text;
 
@@ -524,6 +578,7 @@ namespace GestionMVVM.View.MyUsers
             Ajouter.Visibility = System.Windows.Visibility.Hidden;
         }
 
+        //Barre de recherche
         private void recherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             AfficherAll();

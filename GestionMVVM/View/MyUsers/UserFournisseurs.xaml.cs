@@ -44,8 +44,16 @@ namespace GestionMVVM.View.MyUsers
             AfficherAll();
         }
 
+        //Affichage de tous les fournisseurs
         private void Lister_Click_All(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = false;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -95,8 +103,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des raisons sociales
         private void Lister_Click_Social(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = false;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -145,8 +161,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des localités
         private void Lister_Click_Localite(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = false;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -196,8 +220,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des pays
         private void Lister_Click_Pays(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = false;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -247,6 +279,7 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Ajout d'un fournisseur
         private void Ajouter_un_Fournisseur(object sender, RoutedEventArgs e)
         {
             Lister_Click_All(sender, e);
@@ -277,8 +310,10 @@ namespace GestionMVVM.View.MyUsers
             Ajouter.Visibility = System.Windows.Visibility.Visible;
         }
 
+        //Suppression d'un fournisseur
         private void Supprimer_un_Fournisseur(object sender, RoutedEventArgs e)
         {
+            recherche.IsEnabled = false;
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -319,13 +354,14 @@ namespace GestionMVVM.View.MyUsers
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                recherche.IsEnabled = true;
             }
             finally
             {
                 connexion.Close();
                 
             }
-          
+            recherche.IsEnabled = true;
             InputBox.Visibility = System.Windows.Visibility.Visible;
         }
 
@@ -630,6 +666,7 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Barre de recherche
         private void recherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             AfficherAll();

@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 
-
 namespace GestionMVVM.View.MyUsers
 {
     /// <summary>
@@ -34,8 +33,16 @@ namespace GestionMVVM.View.MyUsers
             AfficherAll();
         }
 
+        //Affichage de toutes les commandes
         private void Lister_Click_All(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = false;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -78,8 +85,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des éditeurs
         private void Lister_Click_Editeur(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = false;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -120,8 +135,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des fournisseurs
         private void Lister_Click_Fournisseur(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = false;
+            b4.IsEnabled = true;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -162,8 +185,16 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Affichage des dates
         private void Lister_Click_Date(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = false;
+            b5.IsEnabled = true;
+            b6.IsEnabled = true;
+
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -205,8 +236,15 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Ajout d'une commande
         private void Ajouter_une_Commande(object sender, RoutedEventArgs e)
         {
+            b1.IsEnabled = true;
+            b2.IsEnabled = true;
+            b3.IsEnabled = true;
+            b4.IsEnabled = true;
+            b5.IsEnabled = false;
+            b6.IsEnabled = true;
             Lister_Click_All(sender, e);
 
             input_Id_Livre.Visibility = System.Windows.Visibility.Visible;
@@ -225,8 +263,10 @@ namespace GestionMVVM.View.MyUsers
             Ajouter.Visibility = System.Windows.Visibility.Visible;
         }
 
+        //Supression d'une commande
         private void Supprimer_une_Commande(object sender, RoutedEventArgs e)
         {
+            recherche.IsEnabled = false;
             String cs = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
             MySqlConnection connexion = new MySqlConnection(cs);
@@ -262,13 +302,14 @@ namespace GestionMVVM.View.MyUsers
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                recherche.IsEnabled = true;
             }
             finally
             {
                 connexion.Close();
                 
             }
-
+            recherche.IsEnabled = true;
             InputBox.Visibility = System.Windows.Visibility.Visible;
         }
 
@@ -432,12 +473,37 @@ namespace GestionMVVM.View.MyUsers
             Annuler.Visibility = System.Windows.Visibility.Hidden;
             Ajouter.Visibility = System.Windows.Visibility.Hidden;
 
-            int Id_Livre = int.Parse(input_Id_Livre.Text);
-            int Id_fournisseur = int.Parse(input_Id_Fournisseur.Text);
+            int Id_Livre;
+            try
+            {
+                Id_Livre = int.Parse(input_Id_Fournisseur.Text);
+            }
+            catch (Exception ex)
+            {
+                Id_Livre = 0;
+            }
+
+            int Id_fournisseur;
+            try
+            {
+                Id_fournisseur = int.Parse(input_Id_Fournisseur.Text);
+            }
+            catch (Exception ex)
+            {
+                Id_fournisseur = 0;
+            }
             string Date_achat = "2020-02-17 18:45:47";
             double Prix_achat = 17.0;
-            int Nbr_exemplaires = int.Parse(input_Nbr_exemplaires.Text);
-           
+            int Nbr_exemplaires;
+            try
+            {
+                Nbr_exemplaires = int.Parse(input_Id_Fournisseur.Text);
+            }
+            catch (Exception ex)
+            {
+                Nbr_exemplaires = 0;
+            }
+
             Lister_Click_All(sender, e);
             string connectionString = @"server=localhost;userid=root;password=;database=gestionlibrairie";
 
@@ -540,6 +606,7 @@ namespace GestionMVVM.View.MyUsers
             }
         }
 
+        //Barre de recherche
         private void recherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             AfficherAll();
