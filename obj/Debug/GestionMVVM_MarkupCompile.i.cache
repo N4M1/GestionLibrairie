@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\ynov\B2_C#\P2\GestionMVVM\obj\Debug\
+C:\ynov\B2 CS\Projets\FINAL\GestionMVVM\obj\Debug\
 GestionMVVM
 none
 false
 DEBUG;TRACE
-D:\ynov\B2_C#\P2\GestionMVVM\App.xaml
+C:\ynov\B2 CS\Projets\FINAL\GestionMVVM\App.xaml
 4840345919
 
-9936812669
-321647330824
+12-525725042
+33506994775
 MainWindow.xaml;View\MyUsers\UserCommandes.xaml;View\MyUsers\UserFournisseurs.xaml;View\MyUsers\UserLivres.xaml;
 
-True
+False
 

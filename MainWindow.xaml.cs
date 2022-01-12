@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace GestionMVVM
 {
@@ -27,6 +14,10 @@ namespace GestionMVVM
 
         private void Livres_Click(object sender, RoutedEventArgs e)
         {
+            livres.IsEnabled = false;
+            fournisseurs.IsEnabled = true;
+            commandes.IsEnabled = true;
+
             View.MyUsers.UserLivres userLivres = new View.MyUsers.UserLivres();
             grContent.Children.Clear();
             grContent.Children.Add(userLivres);
@@ -34,6 +25,10 @@ namespace GestionMVVM
 
         private void Fournisseur_Click(object sender, RoutedEventArgs e)
         {
+            livres.IsEnabled = true;
+            fournisseurs.IsEnabled = false;
+            commandes.IsEnabled = true;
+
             View.MyUsers.UserFournisseurs userFournisseurs = new View.MyUsers.UserFournisseurs();
             grContent.Children.Clear();
             grContent.Children.Add(userFournisseurs);
@@ -41,12 +36,13 @@ namespace GestionMVVM
 
         private void Commandes_Click(object sender, RoutedEventArgs e)
         {
+            livres.IsEnabled = true;
+            fournisseurs.IsEnabled = true;
+            commandes.IsEnabled = false;
+
             View.MyUsers.UserCommandes userCommandes = new View.MyUsers.UserCommandes();
             grContent.Children.Clear();
             grContent.Children.Add(userCommandes);
         }
-
-
-
     }
 }
